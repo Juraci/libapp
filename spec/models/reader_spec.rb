@@ -21,5 +21,4 @@ describe Reader do
     reader.password_confirmation = "pass32"
     expect(reader.password_confirmation).to eq("pass32")
   end
-
 end
