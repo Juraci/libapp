@@ -2,8 +2,9 @@ Given /^I am a guest$/ do
 end
 
 When /^I fill the register form with valid data$/ do
+  @valid_email = "reader01@email.com"
   visit "/register"
-  fill_in "reader_email", with: "reader01@email.com"
+  fill_in "reader_email", with: @valid_email
   fill_in "reader_password", with: "pass32"
   fill_in "reader_password_confirmation", with: "pass32"
   click_button "Register"
@@ -14,12 +15,13 @@ Then /^I should be registered in application$/ do
 end
 
 Then /^I should be logged in$/ do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Welcome, #{@valid_email}")
 end
 
 When(/^I fill the register form with invalid data$/) do
+  @invalid_email = "reader"
   visit "/register"
-  fill_in "reader_email", with: "reader"
+  fill_in "reader_email", with: @invalid_email
   fill_in "reader_password", with: "pass32"
   fill_in "reader_password_confirmation", with: "pass"
   click_button "Register"
@@ -30,5 +32,5 @@ Then(/^I should see the register form again$/) do
 end
 
 Then(/^I should not be registered in application$/) do
-  expect(Reader.find_by_email("reader")).to_not be_nil
+  expect(Reader.find_by_email(@invalid_email)).to be_nil
 end

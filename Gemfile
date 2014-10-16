@@ -7,6 +7,8 @@ gem 'sqlite3'
 group :development, :test do
   gem 'rspec-rails', '~> 2.12.2'
   gem 'spork', '~> 0.9.2'
+  gem 'pry'
+  gem 'pry-nav'
 end
 
 group :test do
