@@ -34,3 +34,20 @@ end
 Then(/^I should not be registered in application$/) do
   expect(Reader.find_by_email(@invalid_email)).to be_nil
 end
+
+Given(/^reader with "(.*?)" exists$/) do |email|
+  @email = email
+  @password = "pass123"
+  Reader.create(email: email, password: @password, password_confirmation: @password)
+end
+
+When(/^I fill  the login form with valid data$/) do
+  visit "/login"
+  fill_in "login_email", with: @email
+  fill_in "login_password", with: @password
+  click_button "Login"
+end
+
+Then(/^I should be logged in as "(.*?)" reader$/) do |email|
+  expect(page).to have_content("Welcome, #{email}")
+end
