@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'sessions/new.html.erb' do
 
   before :each do
-    assign(:login, mock_model('Login').as_null_object.as_new_record)
+    assign(:login, Login.new)
     render
   end
 

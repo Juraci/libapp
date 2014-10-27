@@ -9,6 +9,7 @@ group :development, :test do
   gem 'spork', '~> 0.9.2'
   gem 'pry'
   gem 'pry-nav'
+  gem 'active_attr'
 end
 
 group :test do
